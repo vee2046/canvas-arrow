@@ -28,4 +28,12 @@
       else this.lineTo(x, y);
     }
   };
+  target.prototype.drawArrow = function(start,end){
+    const width = 2;
+    const headLen = 15;
+    const headWidth = 14/2;
+    this.beginPath();
+    this.arrow(start.x, start.y, end.x, end.y, [0, width, -headLen, width, -headLen, headWidth]);
+    this.fill();
+  }
 })(CanvasRenderingContext2D);

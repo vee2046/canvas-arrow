@@ -4,19 +4,41 @@
 <head>
   <title>canvas arrow</title>
   <meta charset="UTF-8" />
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+  <style>
+      body{
+        margin:0;padding:0;
+      }
+  </style>
+  <script src="touch-event.js"></script>
   <script src="canvas-arrow.js"></script>
 </head>
 
 <body>
-  <canvas id="canvas" width="800" height="600" style="background:gray;"></canvas>
+  <canvas id="canvas" style="background:gray;" ></canvas>
   <script>
+    //transform: scale(0.5,0.5) translate(-50%,-50%);
     var colors = ["#000000", "#ffffff", "#ffcc00"];
-    var c = document.getElementById("canvas").getContext("2d");
+    let canvas = document.getElementById("canvas");
+    canvas.width = window.innerWidth * 1;
+    canvas.height = window.innerHeight * 1;
+    var c = canvas.getContext("2d");
+    // c.scale(2,2);
     c.lineWidth = 1;
     c.strokeStyle = "#ffffff";
     c.fillStyle = "#ffffff";
 
-    c.setTransform(1, 0, 0, 1, 20, 0);
+    new TouchEventHandler(canvas,{
+        onMoving(start,end){
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            c.drawArrow(start,end);
+        },
+    });
+
+    /*c.setTransform(1, 0, 0, 1, 20, 0);
 
     // small
     c.translate(0, 40);
@@ -139,7 +161,7 @@
     c.translate(0, 40);
     c.beginPath();
     c.arrow(0, 100, 200, 0, [20, 15, 20, 5, -20, 5, -20, 15]);
-    c.stroke();
+    c.stroke();*/
   </script>
 </body>
 
